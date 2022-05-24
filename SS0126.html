@@ -139,6 +139,13 @@
     // call start playing
     callServer('https://staging-api.street-smart.co/v1/api/hive/trackingstart/',screenId);
 
+    function showPlaceHolder(){
+        const img = document.querySelector('#placeholder');
+        const video = document.querySelector('#videoA');
+        video.style.display = "none";
+        img.style.display ="block"
+    }
+
     // create an observer instance
     var observer = new MutationObserver(function(mutations) {
         // We need only first event and only new value of the tit
@@ -158,6 +165,7 @@
                 }
                 case 'skip':{
                     callServer('https://staging-api.street-smart.co/v1/api/hive/trackingstop/',screenId);
+                    showPlaceHolder();
                     break;
                 }
                 default:{
@@ -251,6 +259,15 @@
         .log-warn  { opacity: 80% !important; }
         .log-error { opacity: 100% !important; }
         .log-fatal { opacity: 100% !important; }
+
+        #placeholder {
+            display: none;
+            z-index: 100;
+            max-width:100%;
+            max-height:100%;
+            height: 100%;
+            width: 100%;
+        }
     </style>
 </head>
 <body>
@@ -261,6 +278,7 @@
     <img id="imageB">
     <iframe id="webViewA"></iframe>
     <iframe id="webViewB"></iframe>
+    <img id="placeholder" src="img/image001.png" >
 </div>
 <div class="debug-container">
     <table>
